@@ -9,7 +9,7 @@
 <body>
     <nav>
       <div class="brand">
-        <a href="/">MeShop.</a>
+        <a href="/">MeShop</a>
       </div>
       <div class="nav-items">
         <a href="/">Home</a>
@@ -21,7 +21,7 @@
 
     <main>
       <aside>
-        <section>
+        <section id="colors">
           <title>Colors</title>
           <ul>
             <li>
@@ -46,28 +46,28 @@
             </li>
           </ul>
         </section>
-        <section>
+        <section id="sizes">
           <title>Sizes</title>
           <ul>
             <li>
-              <input id="s" type="checkbox" name="color" />
+              <input id="s" type="checkbox" name="size" />
               <label for="s">S</label>
             </li>
             <li>
-              <input id="m" type="checkbox" name="color" />
+              <input id="m" type="checkbox" name="size" />
               <label for="m">M</label>
             </li>
             <li>
-              <input id="l" type="checkbox" name="color" />
+              <input id="l" type="checkbox" name="size" />
               <label for="l">L</label>
             </li>
             <li>
-              <input id="xl" type="checkbox" name="color" />
+              <input id="xl" type="checkbox" name="size" />
               <label for="xl">XL</label>
             </li>
           </ul>
         </section>
-        <section>
+        <section id="ratings">
           <title>Rating</title>
           <input
             type="range"
@@ -85,8 +85,9 @@
             <option value="4"></option>
             <option value="5" label="5"></option>
           </datalist>
+          <button id="resetRatingBtn">Reset Rating</button>
         </section>
-        <section>
+        <section id="priceRanges">
           <title>Price Range</title>
           <ul>
             <li>

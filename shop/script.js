@@ -48,8 +48,6 @@ function renderShopPage() {
     let filters = document.getElementById('activebtn');
     let filterbtns = filters.getElementsByClassName('filter');
     console.log(filterbtns);
-    
-    
 
     for (let i = 0; i < filterbtns.length; i++) {
         filterbtns[i].addEventListener('click', function () {
@@ -141,7 +139,118 @@ function renderShopPage() {
 
 
     })
+
+    const colorCheckBoxes = document.querySelectorAll(['input[name="color"]'])
+
+    colorCheckBoxes.forEach(checkbox => {
+        checkbox.addEventListener('change', handleColorFilter);
+    });
+
+    function handleColorFilter() {
+        const selectedColors = Array.from(document.querySelectorAll('input[name="color"]:checked'))
+                              .map(cb => cb.id.toLowerCase());
+
+        console.log(selectedColors);
+        // selectedcolors naam ki array me wo colors hai jo humne check maar rakhe hai
+        // hume bs ye dekhna hai ki ek bhi color array ka agr product me ho to filter maar do
+        const filteredProducts = products.filter(product => {
+
+            const productColors = product.color.map(c => c.toLowerCase())
+            for(i=0; i<selectedColors.length; i++) {
+                if(productColors.includes(selectedColors[i]))
+                    return true;
+            }
+            return false;
+        })
+        displayingProducts(filteredProducts);
+
+        if(selectedColors.length === 0) {
+            displayingProducts(products);
+        }
+
+    }
     
+    const sizeCheckBoxes = document.querySelectorAll(['input[name="size"]'])
+    sizeCheckBoxes.forEach(checkbox => {
+        checkbox.addEventListener('change', handleSizes);
+    });
+    
+    function handleSizes() {
+        const selectedSizes = Array.from(document.querySelectorAll('input[name="size"]:checked'))
+                                .map(checked => checked.id.toLowerCase());
+        console.log(selectedSizes);
+
+        const filteredSizes = products.filter(product => {
+            const sizeChart = product.size.map(c => c.toLowerCase());
+
+            for(i=0; i<selectedSizes.length; i++) {
+                if(selectedSizes.includes(sizeChart[i])) {
+                    return true;
+                }
+            }
+            return false;
+        })
+
+        displayingProducts(filteredSizes);
+
+        if(filteredSizes.length === 0) {
+            displayingProducts(products);
+        }
+
+
+    }
+    
+
+    const ratingRange = document.getElementById('range');
+
+
+    document.getElementById('resetRatingBtn').addEventListener('click', () => {
+        document.getElementById('range').value = 0;
+        displayingProducts(products);
+    });
+    
+    
+    
+    ratingRange.addEventListener('input', () => {
+    const selectedRating = parseFloat(ratingRange.value);
+    console.log("Selected Rating:", selectedRating);
+
+    // Optional: Filter products here
+    const filteredProducts = products.filter(product => product.rating.rate >= selectedRating);
+
+    displayingProducts(filteredProducts);
+    });
+
+
+    const priceCheckboxes = document.querySelectorAll('input[name="prange"]');
+
+    priceCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', handlePriceFilter);
+    });
+
+
+    function handlePriceFilter() {
+        const selectedRanges = Array.from(document.querySelectorAll('input[name="prange"]:checked'))
+                              .map(cb => cb.id);
+
+        const filteredProducts = products.filter(product => {
+            const price = product.price;
+            for (let range of selectedRanges) {
+            if (range === "0-25" && price >= 0 && price <= 25) return true;
+            if (range === "25-50" && price > 25 && price <= 50) return true;
+            if (range === "50-100" && price > 50 && price <= 100) return true;
+            if (range === "100on" && price > 100) return true;
+            }
+            return false;
+        });
+
+        displayingProducts(filteredProducts);
+
+        if(filteredProducts.length === 0){
+            displayingProducts(products);
+        }
+    }
+
 }
 
 function displayingProducts(products) {
