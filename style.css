@@ -1,0 +1,97 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: sans-serif;
+
+}
+
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: black;
+    color: white;
+    position: sticky;
+    z-index: 100;
+    top: 0;
+    padding: 1rem;
+    font-size: 1rem;
+}
+
+nav .brand a {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: white;
+    font-size: xx-large;
+    text-decoration: none;
+}
+
+nav .nav-items a {
+    margin: 0 1rem;
+    text-decoration: none;
+    color: white;
+    font-size: 1rem;
+}
+
+
+
+h1 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: black;
+    text-align: center;
+    padding: 2rem;
+}
+
+.form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+form#signUp {
+    background-color: #1c1c1c;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
+    width: 90%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+form#signUp input[type="text"],
+form#signUp input[type="email"],
+form#signUp input[type="password"] {
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    background-color: #2a2a2a;
+    border: 1px solid #444;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+form#signUp input:focus {
+    border-color: peachpuff;
+    outline: none;
+}
+
+form#signUp input[type="submit"] {
+    padding: 0.75rem;
+    background-color: peachpuff;
+    color: #000;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form#signUp input[type="submit"]:hover {
+    background-color: #ffcba4;
+}

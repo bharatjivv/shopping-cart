@@ -10,8 +10,8 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+let products = JSON.parse(localStorage.getItem('products')) ?? [];
 function renderShopPage() {
-    let products = JSON.parse(localStorage.getItem('products')) ?? [];
 
     let colors = ['red', 'green', 'blue', 'black', 'white'];
     let sizes = ['S', 'M', 'L', 'XL'];
@@ -251,6 +251,9 @@ function renderShopPage() {
         }
     }
 
+    
+    
+    
 }
 
 function displayingProducts(products) {
@@ -291,15 +294,30 @@ function displayingProducts(products) {
                     </div>
                     </div>
                 </div>
-                <button id="addBtn">Add to Cart</button>
+                <button id="addBtn" data-id="${products[i].id}" onclick="addThisItemToCart(${products[i].id})"">Add to Cart</button>
         `
         items.appendChild(itemDiv);
     }
+
 }
 
 function handleSearch(inputval, products) {
     const filteredProducts = products.filter(product => product.title.toLowerCase().includes(inputval));
-    // console.log(filteredProducts)
     displayingProducts(filteredProducts);
+
+}
+
+function addThisItemToCart(pid) {
+    let cart = JSON.parse(sessionStorage.getItem('cart')) || [];
+    
+    console.log(pid, 'retrieved');
+    const product = products.find(p => p.id == pid) ?? products[pid];
+    
+    cart.push({ ...product, qty: 1 });
+    
+    sessionStorage.setItem('cart', JSON.stringify(cart));
+    
+    console.log(`${product.title} added. Cart now:`, cart);
+    
 
 }

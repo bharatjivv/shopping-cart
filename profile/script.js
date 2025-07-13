@@ -17,19 +17,19 @@ window.addEventListener('DOMContentLoaded', ()=> {
 
 function renderProfilePage(users, currentUser, selectedUserIndex) {
     // displayed the current user on the screen
-    let info = document.createElement('div')
-    let para = document.createElement('p')
-    para.innerHTML = `
-                Fname is - ${users[selectedUserIndex].fname}
-                <br />
-                Email is - ${users[selectedUserIndex].email} 
-                <br />
-                Password is - ${users[selectedUserIndex].password}
-                <br />
-                Lname is - ${users[selectedUserIndex].lname}
-                `
-    info.appendChild(para);
-    document.body.appendChild(info);
+    // let info = document.createElement('div')
+    // let para = document.createElement('p')
+    // para.innerHTML = `
+    //             Fname is - ${users[selectedUserIndex].fname}
+    //             <br />
+    //             Email is - ${users[selectedUserIndex].email} 
+    //             <br />
+    //             Password is - ${users[selectedUserIndex].password}
+    //             <br />
+    //             Lname is - ${users[selectedUserIndex].lname}
+    //             `
+    // info.appendChild(para);
+    // document.body.appendChild(info);
 
     let editedNameValue = document.getElementById('editedNameValue');
     editedNameValue.addEventListener('click', () => {

@@ -1,25 +1,116 @@
+<!-- oldschool -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile Page</title>
+    <style>
+      * {
+        margin: 0px;
+        padding: 0px;
+        font-family: sans-serif;
 
+      }
+
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: black;
+        color: white;
+        position: sticky;
+        z-index: 100;
+        top: 0;
+        padding: 1rem;
+        font-size: 1rem;
+      }
+
+      nav .brand a {
+        font-size: 1.5rem;
+        font-weight: bold;
+        text-decoration: none;
+        color: white;
+        font-size: xx-large;
+        text-decoration: none;
+      }
+
+      nav .nav-items a {
+        margin: 0 1rem;
+        text-decoration: none;
+        color: white;
+        font-size: 1rem;
+      }
+
+      h1 {
+        text-align: center;
+        margin: 1rem;
+        text-decoration: underline;
+      }
+
+      .nameEdit {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .nameEdit input {
+        margin: 1rem;
+        width : 50%;
+        height: 35px;
+      }
+
+      .inputBtn {
+        color: white;
+        background-color: black;
+        border-radius: 4px;
+      }
+      .passwordEdit {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .passwordEdit input {
+        margin: 1rem;
+        width : 50%;
+        height: 35px;
+      }
+
+      .inputBtn {
+        color: white;
+        background-color: black;
+        border-radius: 4px;
+      }
+    </style>
 </head>
 <body>
-    <h1>This is profilee page</h1>
-    <div>
+    <nav>
+      <div class="brand">
+        <a href="#">MyShop</a>
+      </div>
+      <div class="nav-items">
+        <a href="#">Home</a>
+        <a href="../login.html">Login</a>
+        <a href="./../index.html">Signup</a>
+        <a href="../shop/index.html">myShop</a>
+        <a href="./../cart/index.html">My Cart</a>
+      </div>
+    </nav>
+
+    <h1>Profile Page</h1>
+    <div class="nameEdit">
         <h2>Edit Name</h2>
         <input type="text" name="fname" id="fname" placeholder="First Name">
         <input type="text" name="lname" id="lname" placeholder="Last Name">
-        <input type="button" value="Save" id="editedNameValue">
+        <input type="button" value="Save" id="editedNameValue" class="inputBtn">
     </div>
-    <div>
+    <div class="passwordEdit">
         <h2>Edit Password</h2>
         <input type="password" name="oldPassword" id="oldPassword" placeholder="oldPassword">
         <input type="password" name="newPassword" id="newPassword" placeholder="newPassword">
         <input type="password" name="confirmPassword" id="confirmPassword" placeholder="confirmPassword">
-        <input type="button" value="Save" id="editPassword">
+        <input type="button" value="Save" id="editPassword" class="inputBtn">
 
     </div>
     <script src="script.js"></script>

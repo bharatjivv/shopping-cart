@@ -37,6 +37,8 @@ signUp.addEventListener('submit', (e) => {
                     createdAt: new Date()
                 })
                 localStorage.setItem("users", JSON.stringify(users));
+                window.location.href = './login.html';
+
             }
             
             document.getElementById('fname').value = ''
@@ -48,6 +50,7 @@ signUp.addEventListener('submit', (e) => {
         }
     }
 })
+
 
 
 
