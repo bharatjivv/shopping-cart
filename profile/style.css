@@ -1,0 +1,89 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: sans-serif;
+
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: black;
+    color: white;
+    position: sticky;
+    z-index: 100;
+    top: 0;
+    padding: 1rem;
+    font-size: 1rem;
+}
+
+nav .brand a {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: white;
+    font-size: xx-large;
+    text-decoration: none;
+}
+
+nav .nav-items a {
+    margin: 0 1rem;
+    text-decoration: none;
+    color: white;
+    font-size: 1rem;
+}
+
+h1 {
+    text-align: center;
+    margin: 1rem;
+    text-decoration: underline;
+}
+
+.nameEdit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.nameEdit input {
+    margin: 1rem;
+    width : 50%;
+    height: 35px;
+}
+
+.inputBtn {
+    color: white;
+    background-color: black;
+    border-radius: 4px;
+}
+.passwordEdit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.passwordEdit input {
+    margin: 1rem;
+    width : 50%;
+    height: 35px;
+}
+
+.inputBtn {
+    color: white;
+    background-color: black;
+    border-radius: 4px;
+}
+
+
+.logoutbutton {
+    border: 2px solid red;
+    background-color: white;
+    color: red;
+    padding: 10px 20px;
+    margin: 1rem auto;
+    display: block;
+    cursor: pointer;
+    font-size: 1rem;
+    border-radius: 5px;
+}

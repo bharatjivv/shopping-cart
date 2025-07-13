@@ -92,3 +92,10 @@ function renderProfilePage(users, currentUser, selectedUserIndex) {
     })
 
 }
+
+document.getElementById('logoutbtn').addEventListener('click', () => {
+    localStorage.removeItem('currentUser');
+    currentUser = null;
+    location.reload();
+    window.location.href = "./../login.html";
+})
