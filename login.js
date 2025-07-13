@@ -51,7 +51,7 @@ document.getElementById('login').addEventListener('click', () => {
                 document.getElementById('password').value = ''
                 // window.location.href('/profile');
                 console.log('redirected to profile section')
-                window.location.href = './../shoppingCartProject/profile/index.html';
+                window.location.href = './profile/index.html';
             } else {
                 console.log('Incorrect Password, Please try again !')
             }
