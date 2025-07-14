@@ -1,44 +1,39 @@
-
-console.log('hello login')
 let users = [];
 let currentUser = [];
 
 window.addEventListener('DOMContentLoaded', () => {
     users = JSON.parse(localStorage.getItem('users') ?? "[]");
 
-    
-    // functionality to automatically retrieve current user and login.
-    // currentUser = JSON.parse(localStorage.getItem('currentUser') ?? "[]");
-    // if(currentUser) {
-    //     console.log('without entering - redirected to profile section')
-    //     console.log('Retrieved data of current user automatically', currentUser);
-    //     window.location.href = './../shoppingCartProject/profile/index.html';
-    // }
 })
 
-let email = document.getElementById('email')
-let password = document.getElementById('password')
+
 
 function generateToken() {
     return Math.random(0, 100000).toString();
 }
 
 document.getElementById('login').addEventListener('click', () => {
+    let email = document.getElementById('email').value;
+    let password = document.getElementById('password').value;
+
 
     if(email === "" || password === "") {
         // If user doesn't enter all the details
-        console.log("Please enter all the details")
-    } else {
+        document.getElementById('errormessage').innerHTML = `<p style="color: red"> Please Enter All the Details. </p>`
+        setTimeout(() => {
+            document.getElementById('errormessage').innerHTML = '';
+        }, 4000);
+
+    } 
+    
+    else {
         // Entered all the details
-        console.log('Entered details', email.value, password.value);
         // Now check whether email and password are inside local storage
-        let userDetails = users.filter((user) => user.email === email.value);
+        let userDetails = users.filter((user) => user.email === email);
         if(userDetails.length > 0) {
             let matchedUser = userDetails[0];
             // If email found, check whether password entered is correct 
-            console.log('User details found inside local', matchedUser);
-            if(password.value === matchedUser.password) {
-                console.log('Password matches! Welcome Top G')
+            if(password === matchedUser.password) {
                 // redirect to profile page
                 // clear the inputs
                 // create a currentUser and store it's email and ID in localstorage
@@ -49,14 +44,19 @@ document.getElementById('login').addEventListener('click', () => {
                 }))
                 document.getElementById('email').value = ''
                 document.getElementById('password').value = ''
-                // window.location.href('/profile');
-                console.log('redirected to profile section')
                 window.location.href = './profile/index.html';
             } else {
-                console.log('Incorrect Password, Please try again !')
+                document.getElementById('errormessage').innerHTML = `<p style="color: red"> Incorrect Password, Please try again !</p>`
+        setTimeout(() => {
+            document.getElementById('errormessage').innerHTML = '';
+        }, 4000);
             }
-        } else {
-            console.log('User not found, please sign up');
+        } 
+        else {
+           document.getElementById('errormessage').innerHTML = `<p style="color: red"> Incorrect Email or Password </p>`
+        setTimeout(() => {
+            document.getElementById('errormessage').innerHTML = '';
+        }, 4000);
         }
     }
 
