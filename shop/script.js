@@ -1,8 +1,6 @@
-console.log('hello from shop')
 
 window.addEventListener('DOMContentLoaded', () => {
     let currentUser = localStorage.getItem('currentUser')
-    console.log(currentUser);
     if(currentUser) {
         renderShopPage()
     } else {
@@ -25,22 +23,17 @@ function renderShopPage() {
     
     if(products.length > 0) {
         // items are already inside localstorage
-        console.log('matlab dukan pe pehle se hi maal utar chuka hai')
-        console.log('products dikha do', products);
         displayingProducts(products);
     } else {
-        console.log('fetching maarni padegi')
         fetch('https://fakestoreapi.com/products')
             .then(response => response.json())
             .then((data) => {
-                console.log('dataaa', data);
                 let newData = data.map((item) => {
                     item.color = getRandomItems(colors, 1, 5);
                     item.size = getRandomItems(sizes, 1, 4);
                     return item;
                 })
 
-                console.log('newDataa', newData)
                 products = newData;
                 localStorage.setItem('products', JSON.stringify(newData));
                 displayingProducts(newData);
@@ -49,7 +42,6 @@ function renderShopPage() {
 
     let filters = document.getElementById('activebtn');
     let filterbtns = filters.getElementsByClassName('filter');
-    console.log(filterbtns);
 
     for (let i = 0; i < filterbtns.length; i++) {
         filterbtns[i].addEventListener('click', function () {
@@ -66,10 +58,8 @@ function renderShopPage() {
     }
 
     function handleFilterClick(button) {
-        console.log('handlefilterclick triggered')
         const filterType = button.textContent.trim();
 
-        console.log('Filter clicked:', filterType);
         if(filterType === "Mens")
             displayingMensProducts();
         if(filterType === "Womens")
@@ -84,25 +74,21 @@ function renderShopPage() {
 
     function displayingMensProducts() {
         const menProducts = products.filter(product =>  product.category === "men's clothing")
-        console.log(menProducts)
         displayingProducts(menProducts);
     }
 
     function displayingWomenProducts() {
         const womenProducts = products.filter(product => product.category === "women's clothing")
-        console.log(womenProducts)
         displayingProducts(womenProducts);
     }
 
     function displayingJewellery() {
         const jewellery = products.filter(product => product.category === "jewelery")
-        console.log(jewellery)
         displayingProducts(jewellery);
     }
 
     function displayingElectronics() {
         const electronics = products.filter(product => product.category === "electronics")
-        console.log(electronics)
         displayingProducts(electronics);
     }
 
@@ -110,16 +96,12 @@ function renderShopPage() {
     document.getElementById('searchbar').addEventListener('input', ()=> {
         let inputval = document.getElementById('searchbar').value;
         inputval = inputval.toLowerCase().trim();
-        console.log(inputval);
         handleSearch(inputval, products);
-        // console.log('event triggered inside search')
         
         if(inputval === "") {
             let activebtn = document.getElementById('activebtn');
             let activefilterbtn = activebtn.getElementsByClassName('active')[0];
-            // console.log(activefilterbtn);
             let filterText = activefilterbtn.textContent.trim().toLowerCase();
-            console.log(filterText);
             switch (filterText) {
                 case 'mens':
                     displayingMensProducts();
@@ -152,9 +134,6 @@ function renderShopPage() {
         const selectedColors = Array.from(document.querySelectorAll('input[name="color"]:checked'))
                               .map(cb => cb.id.toLowerCase());
 
-        console.log(selectedColors);
-        // selectedcolors naam ki array me wo colors hai jo humne check maar rakhe hai
-        // hume bs ye dekhna hai ki ek bhi color array ka agr product me ho to filter maar do
         const filteredProducts = products.filter(product => {
 
             const productColors = product.color.map(c => c.toLowerCase())
@@ -180,7 +159,6 @@ function renderShopPage() {
     function handleSizes() {
         const selectedSizes = Array.from(document.querySelectorAll('input[name="size"]:checked'))
                                 .map(checked => checked.id.toLowerCase());
-        console.log(selectedSizes);
 
         const filteredSizes = products.filter(product => {
             const sizeChart = product.size.map(c => c.toLowerCase());
@@ -216,7 +194,6 @@ function renderShopPage() {
     
     ratingRange.addEventListener('input', () => {
     const selectedRating = parseFloat(ratingRange.value);
-    console.log("Selected Rating:", selectedRating);
 
     // Optional: Filter products here
     const filteredProducts = products.filter(product => product.rating.rate >= selectedRating);
@@ -312,12 +289,9 @@ function handleSearch(inputval, products) {
 
 let cart = JSON.parse(sessionStorage.getItem('cart')) || [];
 function addThisItemToCart(pid) {
-    console.log(cart);
-    console.log(pid, 'retrieved');
     const product = products.find(p => p.id == pid);
 
     if (!product) {
-        console.warn(`Product with id ${pid} not found in products list`);
         return; // Don’t push invalid entry
     } else {
         cart.push({ ...product, qty: 1 });
@@ -325,9 +299,7 @@ function addThisItemToCart(pid) {
         cart = cart.filter(item => item && item.id && item.title && item.price);
         sessionStorage.setItem('cart', JSON.stringify(cart));
 
-        console.log(`${product.title} added. Cart now:`, cart);
     }
 
-    
     
 }

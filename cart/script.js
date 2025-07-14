@@ -1,10 +1,8 @@
-console.log('hi from cart')
 let cart = JSON.parse(sessionStorage.getItem('cart')) || [];
 let total = 0;
 window.addEventListener('DOMContentLoaded', () => {
     let currentUser = localStorage.getItem('currentUser');
     
-    console.log(cart);
     if(currentUser) {
         renderCart(cart);
     } else {
@@ -58,18 +56,14 @@ function renderCart(cart) {
 
 
 function removeFromCart(id) {
-    console.log('remove from cart clicked', id);
-    console.log(cart);
     const index = cart.findIndex(item => item.id === id);
     cart.splice(index, 1);
     sessionStorage.setItem('cart', JSON.stringify(cart));
-    console.log('After removing item from cart', cart)
     renderCart(cart);
 }
 
 
 document.getElementById("rzp-button").onclick = function (e) {
-    console.log(total);
   var options = {
     key: "rzp_test_PV1oQ0oMtgXOsq", // Enter the Key ID generated from the Dashboard
     amount: total * 100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise

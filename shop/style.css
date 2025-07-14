@@ -58,7 +58,6 @@ nav .nav-items a {
 
 main {
   display: flex;
-  /* height: 100vh; */
 }
 
 main aside {
@@ -156,15 +155,9 @@ main-content section title {
 }
 
 main-content .items {
-  /* display: flex;
-  width: auto;
-  overflow-x: scroll;
-  padding: 1rem 0;
-  gap: 1rem; */
-
   display: flex;
-  flex-wrap: wrap;          /* Allows wrapping to the next row */
-  gap: 1rem;                /* Space between items */
+  flex-wrap: wrap;          
+  gap: 1rem;              
   padding: 1rem 0;
 }
 
@@ -179,7 +172,7 @@ main-content .items {
 main-content .items .item {
   border: 1px solid #e0e0e0;
   border-radius: 12px;
-  width: calc(33.333% - 1rem); /* 4 per row */
+  width: calc(33.333% - 1rem);
   flex: 0 0 calc(25% - 1rem);
   box-sizing: border-box;
   display: flex;
@@ -276,12 +269,12 @@ main-content .items .item button:hover {
 
 @media (max-width: 1024px) {
   main-content .items .item {
-    width: calc(50% - 1rem); /* 2 per row */
+    width: calc(50% - 1rem); 
   }
 }
 
 @media (max-width: 600px) {
   main-content .items .item {
-    width: 100%; /* 1 per row */
+    width: 100%;
   }
 }
