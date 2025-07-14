@@ -38,8 +38,8 @@ document.getElementById('login').addEventListener('click', () => {
                 // clear the inputs
                 // create a currentUser and store it's email and ID in localstorage
                 localStorage.setItem('currentUser', JSON.stringify({
-                    email: email.value,
-                    password: password.value,
+                    email: email,
+                    password: password,
                     token: generateToken()
                 }))
                 document.getElementById('email').value = ''
@@ -61,3 +61,4 @@ document.getElementById('login').addEventListener('click', () => {
     }
 
 })
+

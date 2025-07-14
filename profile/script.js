@@ -1,35 +1,30 @@
-console.log('hi from profile page')
 let currentUser = null;
 window.addEventListener('DOMContentLoaded', ()=> {
     let users = JSON.parse(localStorage.getItem('users'));
     currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    let selectedUserIndex = users.findIndex((usr) => {return currentUser.email === usr.email})
 
-
-    if(currentUser) {
-        renderProfilePage(users, currentUser, selectedUserIndex);
-    } else {
-         // redirect them to login page
-        window.location.href = "./../../shoppingCartProject/login.html";
+    if (!currentUser || users.length === 0) {
+        window.location.href = "../login.html";
+        return;
     }
+
+    let selectedUserIndex = users.findIndex(
+        usr => currentUser.email === usr.email
+    );
+
+    if (selectedUserIndex === -1) {
+        localStorage.removeItem('currentUser');
+        window.location.href = "../login.html";
+        return;
+    }
+
+    renderProfilePage(users, currentUser, selectedUserIndex);
+    
 })
 
 
+
 function renderProfilePage(users, currentUser, selectedUserIndex) {
-    // displayed the current user on the screen
-    // let info = document.createElement('div')
-    // let para = document.createElement('p')
-    // para.innerHTML = `
-    //             Fname is - ${users[selectedUserIndex].fname}
-    //             <br />
-    //             Email is - ${users[selectedUserIndex].email} 
-    //             <br />
-    //             Password is - ${users[selectedUserIndex].password}
-    //             <br />
-    //             Lname is - ${users[selectedUserIndex].lname}
-    //             `
-    // info.appendChild(para);
-    // document.body.appendChild(info);
 
     let editedNameValue = document.getElementById('editedNameValue');
     editedNameValue.addEventListener('click', () => {
@@ -38,15 +33,24 @@ function renderProfilePage(users, currentUser, selectedUserIndex) {
         let elname = document.getElementById('lname').value;
 
         if(efname === "" || elname === "") {
-            console.log('Please enter all the details');
+            document.getElementById('message').innerHTML = `<p style="color: red"> Please enter all the details</p>`
+            setTimeout(() => {
+                document.getElementById('message').innerHTML = '';
+            }, 4000);
         } else {
-            document.getElementById('fname').value = ''
-            document.getElementById('lname').value = ''
-
             // changing fname and lname
             users[selectedUserIndex].fname = efname;
             users[selectedUserIndex].lname = elname;
             localStorage.setItem('users', JSON.stringify(users));
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            document.getElementById('fname').value = ''
+            document.getElementById('lname').value = ''
+
+            document.getElementById('message').innerHTML = `<p style="color: green">Name Updated !</p>`
+            setTimeout(() => {
+                document.getElementById('message').innerHTML = '';
+            }, 4000);
+
         }
 
     })
@@ -59,18 +63,29 @@ function renderProfilePage(users, currentUser, selectedUserIndex) {
         let confirmPassword = document.getElementById('confirmPassword').value;
 
         if(oldPassword === "" || newPassword === "" || confirmPassword === "") {
-            console.log('Please enter all the details');
+            document.getElementById('message').innerHTML = `<p style="color: red"> Please enter all the details</p>`
+            setTimeout(() => {
+                document.getElementById('message').innerHTML = '';
+            }, 4000);
         } else {
             // check if old password is correct.
             if(oldPassword !== users[selectedUserIndex].password) {
-                // console.log(oldPassword, users[selectedUserIndex].password);
-                console.log('Your old password is not correct! Please re-enter password');
+                
+                document.getElementById('message').innerHTML = `<p style="color: red"> Your old password is not correct! Please re-enter password</p>`
+            setTimeout(() => {
+                document.getElementById('message').innerHTML = '';
+            }, 4000);
             } else {
-                console.log('Old password entered matches! Ab tujhe change karne dunga password')
                 if(newPassword !== confirmPassword) {
-                    console.log('New Password and confirm Password not equal!Please re-enter.');
+                     document.getElementById('message').innerHTML = `<p style="color: red"> New Password and confirm Password not equal! Please re-enter.</p>`
+            setTimeout(() => {
+                document.getElementById('message').innerHTML = '';
+            }, 4000);
                 } else {
-                    console.log('ab jab new password aur confirm password equal hai to update kar deta hoon tere passwords');
+                    document.getElementById('message').innerHTML = `<p style="color: green"> Passwords Updated Successfully !</p>`
+            setTimeout(() => {
+                document.getElementById('message').innerHTML = '';
+            }, 4000);
                     users[selectedUserIndex].password = newPassword;
                     currentUser.password = newPassword;
                     localStorage.setItem('users', JSON.stringify(users));
@@ -85,10 +100,6 @@ function renderProfilePage(users, currentUser, selectedUserIndex) {
             }
         }
 
-
-        // if(oldPassword === "" || newPassword === "" || confirmPassword === "" || (oldPassword !== users[selectedUserIndex].password) || (newPassword !== confirmPassword)) 
-        // We can also converge all conditions under single if block
-
     })
 
 }
@@ -99,3 +110,4 @@ document.getElementById('logoutbtn').addEventListener('click', () => {
     location.reload();
     window.location.href = "./../login.html";
 })
+
