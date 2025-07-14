@@ -3,7 +3,7 @@ let cart = JSON.parse(sessionStorage.getItem('cart')) || [];
 let total = 0;
 window.addEventListener('DOMContentLoaded', () => {
     let currentUser = localStorage.getItem('currentUser');
-
+    
     console.log(cart);
     if(currentUser) {
         renderCart(cart);
@@ -24,32 +24,35 @@ function renderCart(cart) {
     summaryList.innerHTML = '';
     total = 0;
 
-    cart.forEach((item, i) => {
-    // Left section
-    const itemDiv = document.createElement('div');
-    itemDiv.className = 'cart-item';
+    if(cart.length > 0) {
+      cart.forEach((item, i) => {
+      // Left section
+      const itemDiv = document.createElement('div');
+      itemDiv.className = 'cart-item';
 
-    const truncatedTitle = item.title.length > 45
-  ? item.title.substring(0, 25) + '...'
-  : item.title;
+      const truncatedTitle = item.title.length > 45 
+      ? item.title.substring(0, 25) + '...'
+      : item.title;
 
-    itemDiv.innerHTML = `
+      itemDiv.innerHTML = `
         <h4>${item.title}</h4>
         <div>
         <span>$${item.price}</span>
         <button class="remove-btn" onclick="removeFromCart(${item.id})">Remove</button>
         </div>
-    `;
-    cartItemsDiv.appendChild(itemDiv);
+        `;
+      cartItemsDiv.appendChild(itemDiv);
 
-    // Right summary
-    const summaryItem = document.createElement('li');
-    summaryItem.innerHTML = `<span>${i+1} .  ${truncatedTitle}</span><span>$${item.price}</span>`;
-    summaryList.appendChild(summaryItem);
+      // Right summary
+      const summaryItem = document.createElement('li');
+      summaryItem.innerHTML = `<span>${i+1} .  ${truncatedTitle}</span><span>$${item.price}</span>`;
+      summaryList.appendChild(summaryItem);
 
-    total += item.price;
-    });
+      total += item.price;
+      });
 
+    }
+ 
     totalDiv.innerHTML = `<span>Total</span><span>$${total.toFixed(2)}</span>`;
 }
 

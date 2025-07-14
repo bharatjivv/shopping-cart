@@ -2,7 +2,7 @@ console.log('hello from shop')
 
 window.addEventListener('DOMContentLoaded', () => {
     let currentUser = localStorage.getItem('currentUser')
-
+    console.log(currentUser);
     if(currentUser) {
         renderShopPage()
     } else {
@@ -11,6 +11,7 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 let products = JSON.parse(localStorage.getItem('products')) ?? [];
+
 function renderShopPage() {
 
     let colors = ['red', 'green', 'blue', 'black', 'white'];
@@ -40,6 +41,7 @@ function renderShopPage() {
                 })
 
                 console.log('newDataa', newData)
+                products = newData;
                 localStorage.setItem('products', JSON.stringify(newData));
                 displayingProducts(newData);
             })
@@ -200,6 +202,7 @@ function renderShopPage() {
 
     }
     
+    
 
     const ratingRange = document.getElementById('range');
 
@@ -307,17 +310,24 @@ function handleSearch(inputval, products) {
 
 }
 
+let cart = JSON.parse(sessionStorage.getItem('cart')) || [];
 function addThisItemToCart(pid) {
-    let cart = JSON.parse(sessionStorage.getItem('cart')) || [];
-    
+    console.log(cart);
     console.log(pid, 'retrieved');
-    const product = products.find(p => p.id == pid) ?? products[pid];
-    
-    cart.push({ ...product, qty: 1 });
-    
-    sessionStorage.setItem('cart', JSON.stringify(cart));
-    
-    console.log(`${product.title} added. Cart now:`, cart);
-    
+    const product = products.find(p => p.id == pid);
 
+    if (!product) {
+        console.warn(`Product with id ${pid} not found in products list`);
+        return; // Don’t push invalid entry
+    } else {
+        cart.push({ ...product, qty: 1 });
+    
+        cart = cart.filter(item => item && item.id && item.title && item.price);
+        sessionStorage.setItem('cart', JSON.stringify(cart));
+
+        console.log(`${product.title} added. Cart now:`, cart);
+    }
+
+    
+    
 }
